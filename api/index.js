@@ -17,6 +17,7 @@ const mime = require('mime-types');
 
 require('dotenv').config();
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
@@ -255,6 +256,6 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true,
   // ssl: true,  // Ensure SSL is enabled
   // sslValidate: false  // Optional: To avoid SSL validation issues, especially during development
- }).then(()=> app.listen(4000)).then(() => {console.log("db connected")});
+ }).then(()=> app.listen(PORT, '0.0.0.0')).then(() => {console.log("db connected")});
 
 // app.listen(4000);
