@@ -250,7 +250,7 @@ app.post('/api/register', async (req,res) => {
     });
     res.status(200).json(userDoc);
   } catch (e) {
-    res.status(422).json("Registration unsuccessful");
+    res.status(422).json(e);
   }
 
 });
