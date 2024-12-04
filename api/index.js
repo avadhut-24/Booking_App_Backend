@@ -31,7 +31,7 @@ const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
 
 app.use(express.json());
 app.use(cookieParser());
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 // app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
