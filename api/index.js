@@ -27,14 +27,17 @@ const app = express();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
-const bucket = 'dawid-booking-app';
+
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/uploads', express.static(__dirname+'/uploads'));
+const PORT = process.env.PORT || 4000;
+// app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
-  origin: 'https://booking-app-frontend-qwsc.vercel.app/',
+  origin: 'https://booking-app-frontend-qwsc.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 //////////////////////////////////////////////////Uplaod AWs//////////////////////////////////
@@ -547,6 +550,6 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true,
   // ssl: true,  // Ensure SSL is enabled
   // sslValidate: false  // Optional: To avoid SSL validation issues, especially during development
- }).then(()=> app.listen(4000)).then(() => {console.log("db connected")});
+ }).then(()=> app.listen(PORT, '0.0.0.0')).then(() => {console.log("db connected")});
 
 // app.listen(4000);
