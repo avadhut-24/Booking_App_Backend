@@ -496,6 +496,8 @@ app.post('/api/bookings', async (req, res) => {
 // })
 
 app.get('/api/bookings', async (req, res) => {
+  console.log("Working");
+
   try {
     const userData = await getUserDataFromReq(req);
 
