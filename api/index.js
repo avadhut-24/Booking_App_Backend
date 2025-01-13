@@ -40,6 +40,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+app.options('*', cors());
+
 //////////////////////////////////////////////////Uplaod AWs//////////////////////////////////
 
 
@@ -497,6 +499,7 @@ app.post('/api/bookings', async (req, res) => {
 
 app.get('/api/bookings', async (req, res) => {
   console.log("Working");
+  // res.status(200).json("Working");
 
   try {
     const userData = await getUserDataFromReq(req);
