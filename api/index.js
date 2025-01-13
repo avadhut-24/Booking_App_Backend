@@ -444,6 +444,10 @@ app.put('/api/places', async (req,res) => {
 
 
 app.post('/api/bookings', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://booking-app-frontend-2ogp.vercel.app'); // Allow your frontend origin
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE'); // Allow HTTP methods
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization'); // Allow headers
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Enable credentials (if needed)
   try {
     const userData = await getUserDataFromReq(req); // Get user data from request (e.g., JWT)
     
