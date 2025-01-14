@@ -29,6 +29,7 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
 
 
+
 app.use(express.json());
 app.use(cookieParser());
 const PORT = process.env.PORT || 10000;
@@ -40,14 +41,20 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.options('*', cors());
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174'); // Your frontend URL
+app.use((err, req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
+  
+  console.error('Error:', err.message);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
+
+
+
+app.options('*', cors());
+
 
 
 
