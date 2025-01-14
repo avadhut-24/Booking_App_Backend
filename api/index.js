@@ -450,43 +450,50 @@ app.post('/api/bookings', async (req, res) => {
   // res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE'); // Allow HTTP methods
   // res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization'); // Allow headers
   // res.setHeader('Access-Control-Allow-Credentials', 'true'); // Enable credentials (if needed)
-  try {
-    const userData = await getUserDataFromReq(req); // Get user data from request (e.g., JWT)
+  // try {
+  //   const userData = await getUserDataFromReq(req); // Get user data from request (e.g., JWT)
     
-    const {
-      place,
-      checkIn,
-      checkOut,
-      numberOfGuests,
-      name,
-      phone,
-      price,
-      paymentDetails, // assuming this is part of the request for payment info
-    } = req.body;
+  //   const {
+  //     place,
+  //     checkIn,
+  //     checkOut,
+  //     numberOfGuests,
+  //     name,
+  //     phone,
+  //     price,
+  //     paymentDetails, // assuming this is part of the request for payment info
+  //   } = req.body;
 
-    // Validate that all required fields are present
-    if (!place || !checkIn || !checkOut || !numberOfGuests || !name || !phone || !price) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
+  //   // Validate that all required fields are present
+  //   if (!place || !checkIn || !checkOut || !numberOfGuests || !name || !phone || !price) {
+  //     return res.status(400).json({ error: 'Missing required fields' });
+  //   }
 
-    // Create the booking in the database
-    const booking = await Booking.create({
-      place,
-      checkIn,
-      checkOut,
-      numberOfGuests,
-      name,
-      phone,
-      price,
-      user: userData.id,
-      paymentDetails, // Save payment info if available
-    });
+  //   // Create the booking in the database
+  //   const booking = await Booking.create({
+  //     place,
+  //     checkIn,
+  //     checkOut,
+  //     numberOfGuests,
+  //     name,
+  //     phone,
+  //     price,
+  //     user: userData.id,
+  //     paymentDetails, // Save payment info if available
+  //   });
 
-    res.status(201).json(booking); // Return the created booking data
+  //   res.status(201).json(booking); // Return the created booking data
 
+  // } catch (err) {
+  //   console.error(err); // Log the error for debugging purposes
+  //   res.status(500).json({ error: 'Something went wrong while saving the booking. Please try again.' });
+  // }
+  try {
+    const userData = await getUserDataFromReq(req);
+    console.log('User Data:', userData);
   } catch (err) {
-    console.error(err); // Log the error for debugging purposes
-    res.status(500).json({ error: 'Something went wrong while saving the booking. Please try again.' });
+    console.error('Error in getUserDataFromReq:', err);
+    return res.status(401).json({ error: 'Unauthorized' }); // Add CORS headers here if necessary
   }
 });
 
