@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 10000;
 // app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
-  origin: 'https://booking-app-frontend-2ogp.vercel.app',
+  origin: 'http://localhost:5174',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
