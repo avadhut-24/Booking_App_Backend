@@ -29,31 +29,43 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
 
 
-
-app.use(express.json());
-app.use(cookieParser());
 const PORT = process.env.PORT || 10000;
 // app.use('/uploads', express.static(__dirname+'/uploads'));
+app.use((req, res, next) => {
+  console.log(`CORS middleware running for ${req.method} ${req.url}`);
+  next();
+});
+
 app.use(cors({
-  credentials: true,
   origin: 'http://localhost:5174',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allows cookies and credentials
 }));
 
-app.use((err, req, res, next) => {
+
+// app.use((err, req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+//   console.error('Error:', err.message);
+//   res.status(500).json({ error: 'Internal Server Error' });
+// });
+
+app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-  console.error('Error:', err.message);
-  res.status(500).json({ error: 'Internal Server Error' });
+  res.sendStatus(204); // Respond with no content
 });
 
 
 
-app.options('*', cors());
+app.use(express.json());
+app.use(cookieParser());
 
 
 
