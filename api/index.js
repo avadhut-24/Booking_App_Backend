@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://unique-pika-f4c100.netlify.app',
+  origin: 'https://booking-app-frontend-1rziefcfi-avadhut-s-projects.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Allows cookies and credentials
