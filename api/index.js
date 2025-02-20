@@ -250,16 +250,26 @@ app.post('/api/create-order', async (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  
+
 
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
-    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-      if (err) throw err;
-      resolve(userData);
+    const token = req.cookies?.token; // Ensure cookies exist
+
+    if (!token) {
+      return reject(new Error("No token provided"));
+    }
+
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) {
+        reject(err); // Use reject instead of throw
+      } else {
+        resolve(userData);
+      }
     });
   });
 }
+
 
 app.get('/api/test', (req,res) => {
   // mongoose.connect(process.env.MONGO_URL);
@@ -474,10 +484,6 @@ app.put('/api/places', async (req,res) => {
 
 
 app.post('/api/bookings', async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://booking-app-frontend-2ogp.vercel.app'); // Allow your frontend origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE'); // Allow HTTP methods
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization'); // Allow headers
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Enable credentials (if needed)
   try {
     const userData = await getUserDataFromReq(req); // Get user data from request (e.g., JWT)
     
@@ -516,21 +522,9 @@ app.post('/api/bookings', async (req, res) => {
     console.error(err); // Log the error for debugging purposes
     res.status(500).json({ error: 'Something went wrong while saving the booking. Please try again.' });
   }
-  // try {
-  //   const userData = await getUserDataFromReq(req);
-  //   console.log('User Data:', userData);
-  // } catch (err) {
-  //   console.error('Error in getUserDataFromReq:', err);
-  //   return res.status(401).json({ error: 'Unauthorized' }); // Add CORS headers here if necessary
-  // }
 });
 
 
-// app.get('/', (req, res) =>{
-//   console.log("Hii");
-//    res.send("hello!");
-   
-// })
 
 app.get('/api/bookings', async (req, res) => {
   console.log("Working");
