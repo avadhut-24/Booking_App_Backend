@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://booking-app-frontend-nine.vercel.app/',
+  origin: 'https://booking-app-frontend-nine.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Allows cookies and credentials
