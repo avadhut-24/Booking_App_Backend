@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://booking-app-frontend-1rziefcfi-avadhut-s-projects.vercel.app',
+  origin: 'https://booking-app-frontend-nine.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Allows cookies and credentials
@@ -248,8 +248,6 @@ app.post('/api/create-order', async (req, res) => {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 function getUserDataFromReq(req) {
