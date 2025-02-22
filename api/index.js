@@ -556,13 +556,13 @@ app.get('/api/bookings', async (req, res) => {
     res.json(bookingsWithPreSignedUrls);
   } catch (error) {
     console.error('Error fetching bookings:', error);
-    res.status(500).json({ message: 'Error fetching bookings' });
+    res.status(500).json({ message: error });
   }
 });
 
 
 app.get('/', (req, res) => {
-  res.send("HEre is the resposens!");
+  res.send("Here is the response!");
 })
 
 app.delete('/api/users/:id', async (req, res) => {
